@@ -3,7 +3,7 @@ const {
   checkIsAlpha,
   checkIsAlphanumeric,
   checkIsEmail,
-  // checkIsStrongPassword,
+  checkIsStrongPassword,
 } = require("../../utils/authMethods");
 
 //this function checks any incoming data is empty if is empty send error message back
@@ -71,6 +71,12 @@ function checkIsAlphanumericFunc(req, res, next) {
 
 function checkIsStrongPasswordFunc(req, res, next) {
   const { errorObj } = res.locals;
+
+  if (!checkIsStrongPassword(req.body.password)) {
+    errorObj.weakPassword =
+      "Password must include 1 lowercase, 1 uppercase, 1 special character, 1 number, and a length of 8";
+  };
+
   next();
 };
   
