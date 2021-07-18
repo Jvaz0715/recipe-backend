@@ -5,8 +5,7 @@ const rateLimit = require("express-rate-limit");
 
 const app = express();
 
-const ErrorMessageHandlerClass = require("./routes/utils/ErrorMessageHandlerClass");
-
+const ErrorMessageHandlerClass = require("./routes/utils/ErrorMessageHandlerClass")
 const errorController = require("./routes/utils/errorController");
 // bring in future files
 
@@ -34,7 +33,7 @@ app.use(express.json());
 //parsing form data/incoming data
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/api/v1/user", userRouter);
+app.use("/api/user", userRouter);
 
 /* if nothing is matched before this, app.all will work as a catch all to handle various errors, since we don't know what will be the error always */
 app.all("*", function (req, res, next) {
