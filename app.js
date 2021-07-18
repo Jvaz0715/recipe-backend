@@ -7,9 +7,9 @@ const app = express();
 
 const ErrorMessageHandlerClass = require("./routes/utils/ErrorMessageHandlerClass")
 const errorController = require("./routes/utils/errorController");
-// bring in future files
 
 const userRouter = require("./routes/user/userRouter");
+// bring in future files
 
 app.use(cors());
 
