@@ -3,6 +3,7 @@ const router = express.Router();
 
 const {
     signup,
+    login
 } = require("./controller/userController");
 
 
@@ -13,7 +14,9 @@ const {
     checkIsAlphanumericFunc,
     checkIsEmailFunc,
     checkIsStrongPasswordFunc,
-  } = require("./helpers/authMiddleware");
+} = require("./helpers/authMiddleware");
+
+const jwtMiddleWare = require('../utils/jwtMiddleware');
 
 router.post(
     "/sign-up",
