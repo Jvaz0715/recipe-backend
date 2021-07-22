@@ -16,7 +16,7 @@ const {
     checkIsStrongPasswordFunc,
 } = require("./helpers/authMiddleware");
 
-const jwtMiddleWare = require('../utils/jwtMiddleware');
+// const jwtMiddleWare = require('../utils/jwtMiddleware');
 
 router.post(
     "/sign-up",
@@ -28,5 +28,13 @@ router.post(
     checkIsStrongPasswordFunc,
     signup
 );
+
+router.post(
+    "/login",
+    checkIsUndefined,
+    checkIsEmptyFunc,
+    checkIsEmailFunc,
+    login
+)
 
 module.exports = router;

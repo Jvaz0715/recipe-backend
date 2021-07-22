@@ -1,4 +1,4 @@
-const jwt = require ("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 // we bring in the jwt package that helps create our webtoken
 
 //we then create a async function that will check if a token exists
@@ -18,8 +18,9 @@ async function checkJwtToken(req, res, next) {
         throw { message: "You Don't have permission! ", statusCode: 500 };
       }
     } catch (e) {
-      return next(e);
       res.status(e.statusCode).json({ message: e.message, error: e });
+      return next(e);
+      
     }
 };
 
