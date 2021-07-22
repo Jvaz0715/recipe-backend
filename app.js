@@ -9,6 +9,7 @@ const ErrorMessageHandlerClass = require("./routes/utils/ErrorMessageHandlerClas
 const errorController = require("./routes/utils/errorController");
 
 const userRouter = require("./routes/user/userRouter");
+const faveRecipesRouter = require("./routes/faveRecipes/faveRecipesRouter");
 // bring in future files
 
 app.use(cors());
@@ -34,6 +35,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/user", userRouter);
+app.use("/api/favorite-recipes", faveRecipesRouter);
 
 /* if nothing is matched before this, app.all will work as a catch all to handle various errors, since we don't know what will be the error always */
 app.all("*", function (req, res, next) {
