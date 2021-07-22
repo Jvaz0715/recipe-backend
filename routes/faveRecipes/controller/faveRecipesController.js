@@ -26,9 +26,15 @@ async function deleteRecipe(req, res, next) {
 }; 
 
 async function getAllFaveRecipes(req, res, next) {
+    try {
+        let payload = await faveRecipe.find({});
 
+        res.json(payload);
+        
+      } catch (e) {
+        res.status(500).json({ e: e, message: e.message });
+      }
 }; 
-
 
 
 module.exports = {addRecipe, deleteRecipe, getAllFaveRecipes};
