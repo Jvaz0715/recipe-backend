@@ -12,6 +12,10 @@ const faveRecipeSchema = new mongoose.Schema({
         type: String,
         unique: true,
     },
+    recipeID: {
+        type: String,
+        unique: true,
+    }
 });
 
 module.exports = mongoose.model("faveRecipe", faveRecipeSchema);

@@ -1,13 +1,14 @@
 const faveRecipe = require("../model/faveRecipe")
 
 async function addRecipe(req, res, next) {
-    const { dishName, dishImg, recipeURL } = req.body;
+    const { dishName, dishImg, recipeURL, recipeID } = req.body;
 
     try {
         const createdFaveRecipe = new faveRecipe({
             dishName: dishName,
             dishImg: dishImg,
             recipeURL: recipeURL,
+            recipeID: recipeID,
         });
 
         await createdFaveRecipe.save();
@@ -25,7 +26,7 @@ async function deleteRecipe(req, res, next) {
 
 }; 
 
-async function getAllFaveRecipes(req, res, next) {
+async function getAllFaveRecipes(req, res) {
     try {
         let payload = await faveRecipe.find({});
 
