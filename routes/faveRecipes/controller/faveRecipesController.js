@@ -13,8 +13,8 @@ const getAllFaveRecipes = async (req, res) => {
             })
             .select("-dishName -dishImg -recipeURL -__v -_id");
       
-
-        res.json(payload);
+            
+        res.json(payload.recipes);
         
       } catch (e) {
         res.status(500).json({ e: e, message: e.message });
