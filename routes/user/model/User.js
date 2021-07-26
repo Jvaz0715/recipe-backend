@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
     },
+    recipes: [{ type: mongoose.Schema.ObjectId, ref: "faveRecipe"  }],
 });
 
 module.exports = mongoose.model("user", userSchema);

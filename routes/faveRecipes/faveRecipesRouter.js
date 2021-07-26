@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const jwtMiddleware = require("../utils/jwtMiddleware");
 
 const {
     addRecipe,
@@ -7,11 +8,11 @@ const {
     getAllFaveRecipes,
 } = require("./controller/faveRecipesController")
 
-router.post("/add-recipe", addRecipe);
+router.post("/add-recipe",jwtMiddleware, addRecipe);
 
-router.delete("/delete-recipe", deleteRecipe);
+router.get("/get-all-fave-recipes", jwtMiddleware, getAllFaveRecipes);
 
-router.get("/get-all-fave-recipes", getAllFaveRecipes);
+router.delete("/delete-recipe/:id", jwtMiddleware,deleteRecipe);
 
 module.exports = router;
 

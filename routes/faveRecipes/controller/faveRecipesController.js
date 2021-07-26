@@ -1,34 +1,18 @@
-const faveRecipe = require("../model/faveRecipe")
+const faveRecipe = require("../model/faveRecipe");
+const User = require("../../user/model/User.js");
 
-async function addRecipe(req, res, next) {
-    const { dishName, dishImg, recipeURL, recipeID } = req.body;
 
+const getAllFaveRecipes = async (req, res) => {
     try {
-        const createdFaveRecipe = new faveRecipe({
-            dishName: dishName,
-            dishImg: dishImg,
-            recipeURL: recipeURL,
-            recipeID: recipeID,
-        });
-
-        await createdFaveRecipe.save();
-
-        res.json({
-            message: "Recipe saved to favorites!",
-        });
-    } catch(e) {
-        next(e);
-    }
-
-};
-
-async function deleteRecipe(req, res, next) {
-
-}; 
-
-async function getAllFaveRecipes(req, res) {
-    try {
-        let payload = await faveRecipe.find({});
+        const { decodedJwt } = res.locals;
+        let payload = await User.findOne({ email: decodedJwt.email })
+            .populate({
+                path: "recipes",
+                model: faveRecipe,
+                select:"-__v"
+            })
+            .select("-dishName -dishImg -recipeURL -__v -_id");
+      
 
         res.json(payload);
         
@@ -37,5 +21,55 @@ async function getAllFaveRecipes(req, res) {
       }
 }; 
 
+const addRecipe = async (req, res) => {
+    try {
+        const { dishName, dishImg, recipeURL } = req.body;
+        const createdFaveRecipe = new faveRecipe({
+            dishName,
+            dishImg,
+            recipeURL,
+        });
+
+        const savedFaveRecipe = await createdFaveRecipe.save();
+        
+        const { decodedJwt } = res.locals;
+
+        const foundTargetUser = await User.findOne({ email: decodedJwt.email });
+
+        foundTargetUser.recipes.push(savedFaveRecipe._id);
+
+        await foundTargetUser.save();
+
+        res.json({savedFaveRecipe});
+    } catch(e) {
+        res.status(500).json({ e: e, message: e.message })
+    }
+
+};
+
+
+
+
+const deleteRecipe = async (req, res, next) => {
+    
+    try {
+        let deletedRecipe = await faveRecipe.findByIdAndRemove(req.params.id);
+
+        const { decodedJwt } = res.locals;
+        let foundUser = await User.findOne({ email: decodedJwt.email });
+        let foundUserRecipeArray = foundUser.recipes;
+
+        let filteredRecipeArray = foundUserRecipeArray.filter((id) => {
+            id.toString() !== deletedRecipe._id.toString();
+        })
+
+        foundUser.recipes = filteredRecipeArray;
+        await foundUser.save();
+        res.json({ message: "success", payload: deletedRecipe });
+
+        } catch (e) {
+          next(e);
+        }
+}; 
 
 module.exports = {addRecipe, deleteRecipe, getAllFaveRecipes};
