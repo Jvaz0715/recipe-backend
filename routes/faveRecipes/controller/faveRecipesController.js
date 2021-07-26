@@ -23,11 +23,12 @@ const getAllFaveRecipes = async (req, res) => {
 
 const addRecipe = async (req, res) => {
     try {
-        const { dishName, dishImg, recipeURL } = req.body;
+        const { dishName, dishImg, recipeURL, recipeID } = req.body;
         const createdFaveRecipe = new faveRecipe({
             dishName,
             dishImg,
             recipeURL,
+            recipeID
         });
 
         const savedFaveRecipe = await createdFaveRecipe.save();
@@ -40,7 +41,7 @@ const addRecipe = async (req, res) => {
 
         await foundTargetUser.save();
 
-        res.json({savedFaveRecipe});
+        res.json(savedFaveRecipe);
     } catch(e) {
         res.status(500).json({ e: e, message: e.message })
     }

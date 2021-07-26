@@ -14,7 +14,6 @@ const faveRecipeSchema = new mongoose.Schema({
     },
     recipeID: {
         type: String,
-        unique: true,
     }
 });
 
