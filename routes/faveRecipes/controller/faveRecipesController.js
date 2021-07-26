@@ -41,9 +41,9 @@ const addRecipe = async (req, res) => {
 
         await foundTargetUser.save();
 
-        res.json(savedFaveRecipe);
+        res.json({message: "Recipe added to favorites!"});
     } catch(e) {
-        res.status(500).json({ e: e, message: e.message })
+        res.status(500).json({ e: e, message: "Looks like that recipe already exists in your favorites" })
     }
 
 };
