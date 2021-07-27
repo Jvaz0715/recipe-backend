@@ -48,9 +48,6 @@ const addRecipe = async (req, res) => {
 
 };
 
-
-
-
 const deleteRecipe = async (req, res, next) => {
     
     try {
@@ -61,7 +58,7 @@ const deleteRecipe = async (req, res, next) => {
         let foundUserRecipeArray = foundUser.recipes;
 
         let filteredRecipeArray = foundUserRecipeArray.filter((id) => {
-            id.toString() !== deletedRecipe._id.toString();
+          return  id.toString() !== deletedRecipe._id.toString();
         })
 
         foundUser.recipes = filteredRecipeArray;
