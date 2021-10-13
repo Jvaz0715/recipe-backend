@@ -12,13 +12,12 @@ const getAllFaveRecipes = async (req, res) => {
                 select:"-__v"
             })
             .select("-dishName -dishImg -recipeURL -__v -_id");
-      
             
         res.json(payload.recipes);
         
-      } catch (e) {
+    } catch (e) {
         res.status(500).json({ e: e, message: e.message });
-      }
+    }
 }; 
 
 const addRecipe = async (req, res) => {
