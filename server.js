@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 
 const app = require("./app");
 
-const port = 8080;
+const port = 3001;
 
 mongoose
   .connect(process.env.MONGO_DB, {
