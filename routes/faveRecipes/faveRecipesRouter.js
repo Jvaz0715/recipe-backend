@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const jwtMiddleware = require("../utils/jwtMiddleware");
+const jwtMiddleware = require("../utils/jwtMiddleWare");
 
 const {
     addRecipe,
