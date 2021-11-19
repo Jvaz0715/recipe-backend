@@ -3,7 +3,9 @@ const router = express.Router();
 
 const {
     signup,
-    login
+    login,
+    getAllUsers,
+    deleteUserById
 } = require("./controller/userController");
 
 
@@ -17,6 +19,9 @@ const {
 } = require("./helpers/authMiddleware");
 
 // const jwtMiddleWare = require('../utils/jwtMiddleware');
+
+router.get("/get-all-users", getAllUsers)
+router.delete("/delete-user-by-id/:id", deleteUserById)
 
 router.post(
     "/sign-up",
