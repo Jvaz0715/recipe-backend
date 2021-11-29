@@ -45,7 +45,7 @@ function checkIsEmailFunc(req, res, next) {
   
     next();
 };
-  
+
 function checkIsAlphaFunc(req, res, next) {
     const { errorObj } = res.locals;
     const inComingData = req.body;
@@ -59,7 +59,7 @@ function checkIsAlphaFunc(req, res, next) {
   
     next();
 };
-  
+
 function checkIsAlphanumericFunc(req, res, next) {
     const { errorObj } = res.locals;
     if (!checkIsAlphanumeric(req.body.username)) {
@@ -79,7 +79,7 @@ function checkIsStrongPasswordFunc(req, res, next) {
 
   next();
 };
-  
+
 module.exports = {
   checkIsEmptyFunc,
   checkIsUndefined,

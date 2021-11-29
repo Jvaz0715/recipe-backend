@@ -65,7 +65,7 @@ const deleteRecipe = async (req, res, next) => {
         res.json({ message: "success", payload: deletedRecipe });
 
         } catch (e) {
-          next(e);
+            next(e);
         }
 }; 
 
